@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="windows-1251">
+    <title>Рюкзачные криптосистемы: Алгоритм дешифрования</title>
+    <style>
+        p {
+            text-indent: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="text-align:center;">Рюкзачные криптосистемы</h3>
+    <h3 style="text-align:center;">Алгоритм дешифрования</h3>
+    <p>Расшифровать зашифрованный текст в рюкзаке не менее просто.
+        В начале умножаем уравнение (1) на <code><i><math>w<sup>-1</sup></math></i></code>
+        по модулю <code><i>m</i></code>, который однозначно существует, так как
+        <code><i>(m,w) = 1</i></code>:
+    </p>
+    <code><i><math>
+        <p style="text-align:center;">w<sup>-1</sup>S &#8801; &sum;w<sup>-1</sup>b<sub>i</sub>x<sub>i</sub> (mod m) &#8801; </p>
+        <p style="text-align:center;">&#8801; &sum;w<sup>-1</sup>b<sub>i</sub>x<sub>i</sub> &#8801; &sum;a<sub>i</sub>x<sub>i</sub> (mod m) (1)</p>
+    </math></i></code>
+    <p>Так как <code><i><math>m &gt; 2a<sub>n</sub>, 2a<sub>n</sub> &gt; Z(a<sub>i</sub>x<sub>i</sub>)</math></i></code>
+        ,то <code><i><math>m &gt; &sum;(a<sub>i</sub>x<sub>i</sub>) (2)
+        </math></i></code></p>
+    <p>Допустим <code><i>S &#8801; w<sup>-1</sup>S (mod m), 0 &le; S' &lt; m</i></code>.</p>
+    <p>Тогда задача о рюкзаке может быть решена, потому что исходные коэффициенты
+        <code><i>a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub></i></code>
+        увеличиваются в разы. Уникальное решение
+        <code><i>(x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub>)</i></code> дает блок
+        <code><i>x<sub>1</sub>x<sub>2</sub>...x<sub>n</sub></i></code>. После нахождения всех блоков все,
+        что необходимо сделать, это перегруппировать биты в блоки по пять битов, а затем
+        заменить букву, соответствующую каждому блоку.
+    </p>
+    <p></p>
+    <p>Рассмотрим пример. Расшифруем сообщение ранцевого зашифрованного текста
+        <code><i>128 97 81 31 0 78 54 97</i></code>,
+        созданное с модулем <code><i>m = 65</i></code>
+        , множителем <code><i>w = 12</i></code>
+        и последовательностью шифрования <code><i>7, 31, 50, 47</i></code>.
+    </p>
+
+    <ol>
+        <li>Используем алгоритм Евклида, чтобы найти значение, обратное <code><i>w</i></code> по модулю
+            <code><i>m</i></code>. Начиная с
+            <code><i><math>38·12 &#8801; 1 (mod 65)</math></i></code>
+        </li>
+        <li>Построим задачу о рюкзаке для каждого блока числового зашифрованного текста и решим ее.</li>
+        <code><i><math>
+            <p style="text-align:center;">
+                S = b<sub>1</sub>x<sub>1</sub> + b<sub>2</sub>x<sub>2</sub> + b<sub>3</sub>x<sub>3</sub> + b<sub>4</sub>x<sub>4</sub>
+            </p>
+            <p style="text-align:center;">
+                128 = 7x<sub>1</sub> + 31x<sub>2</sub> + 50x<sub>3</sub> + 47x<sub>4</sub>
+            </p>
+        </math></i></code>
+        <p>Умножиd обе стороны на <code><i><math>w<sup>-1</sup> &#8801; 38 (mod 65)</math></i></code>, получим </p>
+        <p style="text-align:center;"><code><i><math>
+            54 = 6x<sub>1</sub> + 8x<sub>2</sub> + 15x<sub>3</sub> + 31x<sub>4</sub>
+        </math></i></code></p>
+        <p>Решая, получаем <code><i><math>x<sub>1</sub>x<sub>1</sub>x<sub>1</sub>x<sub>1</sub> = 0111.</math></i></code>
+        </p>
+        <p>Аналогично мы получаем другие блоки:</p>
+        <p><code><i>0011 0110 0100 0000 0101 1001 0011.</i></code></p>
+        <li>Восстановим открытый текст, перегруппировав биты в блоки длиной пять,
+            а затем замените каждый на соответствующую букву.</li>
+    </ol>
+    <p>Это приводит к исходному сообщению <code><i>«ON SALE»</i></code>.</p>
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="windows-1251">
+    <title>Рюкзачные криптосистемы: Алгоритм шифрования</title>
+    <style>
+        p {
+            text-indent: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="text-align:center;">Рюкзачные криптосистемы</h3>
+    <h3 style="text-align:center;">Алгоритм шифрования</h3>
+    <p>Мы можем построить систему с открытым ключом, основанную на задачах
+        с рюкзаком, с увеличивающимися весами
+        <code><i>a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub></i></code>
+        . С этой целью выберите положительное целое число
+        <code><i>m &gt; 2a<sub>n</sub></i></code>
+        и положительное целое число <code><i>w</i></code> относительно
+        простого числа m. Теперь сформируйте последовательность
+    </p>
+    <p style="text-align:center;"><code><i><math>
+            b<sup>1</sup>, b<sup>2</sup>,..., b<sup>n</sup>, 
+            b<sup>i</sup> = w·a<sup>i</sup> (mod m), 0 &le; b_i &lt; m
+        </math></i></code></p>
+    <p> Эта последовательность не обязательно должна быть сверхувеличивающейся.
+        Пользователь криптосистемы ранца делает последовательность шифрования 
+        <code><i>b<sub>1</sub>, b<sub>2</sub>, ..., b<sub>n</sub></i></code>
+        общедоступной в каталоге, сохраняя в секрете исходную
+        последовательность <code><i>a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub></i></code>
+        , модуль шифрования <code><i>m</i></code> и множитель <code><i>w</i></code>.
+    </p>
+    <p>Перед шифрованием открытого текста преобразуйте его в битовую строку,
+        используя пятизначные двоичные эквиваленты в таблице 1. Затем строка разбивается
+        на блоки <code><i>P</i></code> длиной <code><i>n</i></code> - количество элементов в последовательности
+        шифрования.
+        Если в последнем блоке нет <code><i>n</i></code> битов, то дополните его достаточным количеством
+        единиц, чтобы все блоки были одинаковой длины <code><i>n</i></code>.</p>
+    <p>Теперь преобразуйте каждый числовой блок открытого текста
+        <code><i>x<sub>1</sub>x<sub>2</sub>...x<sub>n</sub></i></code>
+        в сумму (1)
+    </p>
+    <p style="text-align:center;"><code><i><math>
+        S = b<sub>1</sub>·x<sub>1</sub> + b<sub>2</sub>·x<sub>2</sub> + ... + b<sub>n</sub>·x<sub>n</sub>   (1)
+    </math></i></code></p>
+    <p>Сгенерированные таким образом суммы образуют зашифрованное текстовое сообщение.</p>
+    <p style="text-align:center;"><code><i><table border="0" width="100%">
+            <tr><td colspan="6" align='center' valign="middle">Таблица 1</td></tr>
+            <tr><td colspan="6" align='center' valign="middle">Латинский алфавит в виде двоичного кода</td></tr>
+            <tr>
+                <td align='left'>Буква </td>
+                <td align='left'>Эквивалент  </td>
+                <td align='left'>Буква </td>
+                <td align='left'>Эквивалент  </td>
+                <td align='left'>Буква </td>
+                <td align='left'>Эквивалент  </td>
+            </tr><tr>
+                <td align='left'>A</td>
+                <td align='left'>00000</td>
+                <td align='left'>J</td>
+                <td align='left'>00000</td>
+                <td align='left'>S</td>
+                <td align='left'>00000</td>
+            </tr><tr>
+                <td align='left'>B</td>
+                <td align='left'>00000</td>
+                <td align='left'>K</td>
+                <td align='left'>00000</td>
+                <td align='left'>T</td>
+                <td align='left'>00000</td>
+            </tr><tr>
+                <td align='left'>C</td>
+                <td align='left'>00000</td>
+                <td align='left'>L</td>
+                <td align='left'>00000</td>
+                <td align='left'>V</td>
+                <td align='left'>00000</td>
+            </tr><tr>
+                <td align='left'>D</td>
+                <td align='left'>00000</td>
+                <td align='left'>M</td>
+                <td align='left'>00000</td>
+                <td align='left'>U</td>
+                <td align='left'>00000</td>
+            </tr><tr>
+                <td align='left'>E</td>
+                <td align='left'>00000</td>
+                <td align='left'>N</td>
+                <td align='left'>00000</td>
+                <td align='left'>W</td>
+                <td align='left'>00000</td>
+            </tr><tr>
+                <td align='left'>F</td>
+                <td align='left'>00101</td>
+                <td align='left'>O</td>
+                <td align='left'>01110</td>
+                <td align='left'>X</td>
+                <td align='left'>10111</td>
+            </tr><tr>
+                <td align='left'>G</td>
+                <td align='left'>00110</td>
+                <td align='left'>P</td>
+                <td align='left'>01111</td>
+                <td align='left'>Y</td>
+                <td align='left'>11000</td>
+            </tr><tr>
+                <td align='left'>H</td>
+                <td align='left'>00111</td>
+                <td align='left'>Q</td>
+                <td align='left'>10000</td>
+                <td align='left'>Z</td>
+                <td align='left'>11001</td>
+            </tr><tr>
+                <td align='left'>I</td>
+                <td align='left'>01000</td>
+                <td align='left'>R</td>
+                <td align='left'>10001</td>
+            </tr>
+        </table></i></code></p>
+    <p></p>
+    <p>Следующий пример иллюстрирует этот метод.</p>
+    <p>Используя ранцевый шифр, основанный на увеличивающихся весах
+        <code><i>W = 6, 8, 15, 31</i></code>
+        , модуле <code><i>m = 65</i></code>
+        , множителе <code><i>v = 12</i></code>
+        , зашифруйте сообщение: <code><i>«ON SALE»</i></code>
+    </p>
+    <p></p>
+    <p>РЕШЕНИЕ</p>
+    <p></p>
+    <p>Во-первых, обратите внимание, что последовательность содержит <code><i><math>n = 4</math></i></code> элемента,
+        <code><i><math>m &gt; 2</math></i></code> и <code><i><math>(m,w) = (65, 12) = 1</math></i></code>
+    </p>
+    <ol>
+        <li>Умножьте каждый элемент в последовательности на 12
+            и уменьшите каждое произведение по модулю 65:</li>
+        <code><i>
+        <p style="text-align:center;">6 · 12 &#8801; 7 (mod 65),</p>
+        <p style="text-align:center;">8 · 12 &#8801; 31 (mod 65),</p>
+        <p style="text-align:center;">15 · 12 &#8801; 50 (mod 65),</p>
+        <p style="text-align:center;">31 · 12 &#8801; 47 (mod 65).</p>
+        </i></code>
+        <p>Результирующая последовательность шифрования равна
+            <code><i>7, 31, 50, 47</i></code>.
+        </p>
+        <li>используя таблицу 1, переведем буквы в двоичный код, а затем
+            сгруппируем биты в блоки длиной 4. При необходимости дополним последний
+            блок единицами:</li>
+        <p style="text-align:center;"><code><i><math>
+                01110 01101 10010 00000 01011 00100
+        </math></i></code></p>
+        <p>В результате:</p>
+        <p style="text-align:center;"><code><i><math>
+            0111 0011 0110 0100 0000 0101 1001 0011
+    </math></i></code></p>
+        <li>найти зашифрованное текстовое сообщение. С этой целью
+            преобразуем каждый блок в сумму, умножив биты на элементы
+            <code><i>7, 31, 50 и 47</i></code>
+            последовательности шифрования.
+        </li>
+    </ol>
+</body>
+
+</html>

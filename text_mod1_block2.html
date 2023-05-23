@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="windows-1251">
+    <title>Электронная цифровая подпись по схеме Эль-Гамаля: Создание подписи</title>
+    <style>
+        p {
+            text-indent: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="text-align:center;">Электронная цифровая подпись по схеме Эль-Гамаля</h3>
+    <h3 style="text-align:center;">Создание подписи</h3>
+    <p>Теперь, зная, как генерируются ключи, можем перейти к алгоритму самой подписи.</p>
+    <p>Допустим, отправитель хочет подписать сообщение</p>
+    <p style="text-align:center;"><code><i><math>
+    m = <box>m<sub>1</sub></box>, <box>m<sub>2</sub></box>, ..., <box>m<sub>n</sub></box>
+</math></i></code></p>
+    <p> Чтобы создать цифровую подпись, необходимо</p>
+    <ul>
+        <li>сообщение</li>
+        <li>публичный ключ</li>
+        <li>приватный ключ</li>
+    </ul>
+    <p>Алгоритм:</p>
+    <ol>
+        <li>вычисляем хэш-значение <i>h</i> сообщения
+            <i>m</i>, которое удовлетворяет неравенству
+        </li>
+        <p style="text-align:center;"><code><i><math>
+        <box>h = h(m), 1 &lt; h &lt; p</box>
+    </math></i></code></p>
+        <p>Этот модуль использует алгоритм хэширования строк с использованием кодов символов методом остатка.</p>
+        <p>Алгоритм вычисления хэш-значения выглядит следующим образом:</p>
+        <ul>
+            <li>сообщение разбивается на символы, которые преобразуются в коды</li>
+            <p>Например,</p>
+            <p style="text-align:center;"><code><i><math>
+            <box>m ='cat': ord('c') -> 99, ord('a') -> 97, ord('t') -> 116</box>
+        </math></i></code></p>
+            <li>затем эти коды добавляются с использованием метода остатка</li>
+            <p><code><i>99 + 97 + 116 = 312</i></code></p>
+            <p><code><i>312  % 11 = 4</i></code></p>
+            <p>Здесь <i>11</i> - это модуль, с помощью которого вычисляется хэш.</p>
+
+        </ul>
+        <li>выберите случайное число <i>k</i>, которое является взаимно простым с <i>p - 1</i></li>
+        <p style="text-align:center;"><code><i><math>
+            1 &lt; k &lt; p - 1
+        </math></i></code></p>
+        <li>вычисляем число <i>r</i></li>
+        <p style="text-align:center;"><code><i><math>
+            r = <box>g<sup>k</sup></box> (mod p)
+        </math></i></code></p>
+        <li>вычисляем число <i>u</i></li>
+        <p style="text-align:center;"><code><i><math>
+            u = (h - xr) (mod p - 1)
+        </math></i></code></p>
+        <li>вычисляем число
+            <code><i><math>
+            <box>k<sup>-1</sup></box>
+        </math></i></code>
+            , которое является обратным числом числу <i>k</i> по модулю <i>p - 1</i>
+        </li>
+        <p style="text-align:center;"><code><i><math>
+        <box>k<sup>-1</sup></box>k (mod p - 1) = 1
+    </math></i></code></p>
+        <p>[такое число
+            <code><i><math>
+                <box>k<sup>-1</sup></box>
+            </math></i></code>
+            существует, поскольку <i>k</i> и <i>p - 1</i> заимнопростые, и может быть найдено с помощью обо,щенного
+            алгоритма Евклида.]
+        </p>
+        <li>вычисляем число <i>s</i></li>
+        <p style="text-align:center;"><code><i><math>
+            s  = <box>k<sup>-1</sup></box>u (mod p -1)
+        </math></i></code></p>
+    </ol>
+    <p></p>
+    <p>Наконец, пара чисел <i>&lt;r, s&gt;</i> явяется подписью сообщения <i>m</i>.</p>
+</body>
+
+</html>

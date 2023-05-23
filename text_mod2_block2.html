@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="windows-1251">
+    <title>Задача дискретного логарифмирования: Метод Сильвестра-Полига-Хеллмана</title>
+    <style>
+        p {
+            text-indent: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="text-align:center;">Задача дискретного логарифмирования</h3>
+    <h3 style="text-align:center;">Метод Сильвестра-Полига-Хеллмана</h3>
+    <p>Метод Сильвестра-Полига-Хеллмана нахождения дискретного логарифма <i>x</i> из сравнения (1) был предложен в 1965
+        году Василием Ильичем Нечаевым (1920 - 1999).</p>
+    <p style="text-align:center;"><code><i><math>
+        <box>a<sup>x</sup></box> &#8801; b (mod n)   (1)
+</math></i></code></p>
+    <p>Этот метод позволяет в случае составного показателя <i><math> P<sub>p</sub>(a)</math></i>
+        свести задачу вычисления дискретного логарифма к нескольким таким подзадачам. Именно, при
+        <i><math> P<sub>p</sub>(a) = p<sub>1</sub><sup>a_1</sup>
+                p<sub>2</sub><sup>a_2</sup>...
+                p<sub>k</sub><sup>a_k</sup></math></i>
+        решение задачи поиска целого неотрицательного числа <i>x</i>, удовлетворяющего сравнению (2) можно свести к
+        решению системы сравнений (3).
+    </p>
+    <p style="text-align:center;"><code><i><math>
+        a<sup>x</sup> &#8801; b (mod p), 0 &le; x &lt; P<sub>p</sub>(a)   (2)
+</math></i></code></p>
+    <p style="text-align:center;"><code><i><table border="0" width=50%>
+        <tr>
+            <td rowspan="3" align='right' valign="middle"><font size="+14">&#123;</font></td>
+            <td align='left'>x &#8801; x<sub>1</sub> (mod p<sub>1</sub><sup>a_1</sup>)</td>
+            <td rowspan="3" align='right' valign="middle">(3)</td>
+        </tr>
+        <tr>
+            <td align='left'>...</td>
+        </tr>
+        <tr>
+            <td align='left'>x &#8801; x<sub>k</sub> (mod p<sub>k</sub><sup>a_k</sup>)</td>
+        </tr>
+    </table></i></code></p>
+    <p>Искомое <i>x</i> следует вычислить, пользуясь китайской теоремой об остатках.</p>
+    <p>Рассмотрим алгоритм Полига-Хеллмана. На входе необходимо простое число <i>p</i>
+        и вычеты <i>a, b</i>, удовлетворяющие сравнению (1). А также выполняться равенство (4).
+        На выходе получаем дискретный логарифм (5).</p>
+    <p style="text-align:center;"><code><i><math>
+            <box>ord<sub>p</sub></box>a = q<sup>n</sup>, n &#8712; N, n &gt; 1   (4)
+        </math></i></code></p>
+    <p style="text-align:center;"><code><i><math>
+            x = <box>log<sub>a</sub></box>b (mod q<sup>n</sup>)   (5)
+        </math></i></code></p>
+    <p>Сначала определяем (6). Далее для всех <i>i</i> от <i>1</i> до <i>n-1</i> выполняем (7).</p>
+    <p style="text-align:center;"><code><i><math>
+            <box>a<sub>n-1</sub></box> = a, <box>b<sub>n-1</sub></box> = b   (6)
+        </math></i></code></p>
+    <p style="text-align:center;"><code><i><math>
+        a<sub>n-i-1</sub> &#8801; a<sub>n-i</sub><sup>q</sup> (mod p),
+        b<sub>n-i-1</sub> &#8801; b<sub>n-i</sub><sup>q</sup> (mod p)   (7)
+        </math></i></code></p>
+    <p>Затем для всех <i>i</i> от <i>0</i> до <i>n-1</i> проверить: если <i>i &gt; 0</i>, то найти (8), иначе <i>&gamma;
+            = 1</i>.</p>
+    <p>Определяем (9) и, с помощью, например, метода согласования,
+        находим дискретный логарифм (11), удовлетворяющий сравнению (10).</p>
+    <p style="text-align:center;"><code><i><math>
+        &gamma; &#8801; a<sub>i</sub><sup>x_0</sup>
+        a<sub>i-1</sub><sup>x_1</sup>
+        ...
+        a<sub>1</sub><sup>x_i-1</sup> (mod p)   (8)
+            </math></i></code></p>
+    <p style="text-align:center;"><code><i><math>
+                &beta;<sub>i</sub> &#8801; b<sub>i</sub>
+                &gamma;<sup>-1</sup> (mod p)   (9)
+            </math></i></code></p>
+    <p style="text-align:center;"><code><i><math>
+                a<sub>0</sub><sup>x_i</sup> &#8801; 
+                &beta;<sub>i</sub> (mod p)   (10)
+            </math></i></code></p>
+    <p style="text-align:center;"><code><i><math>
+                x = x<sub>0</sub> + x<sub>1</sub>q + ... + x<sub>n-1</sub>q<sup>n-1</sup> (11)
+            </math></i></code></p>
+    <p>Задача дискретного логарифмирования решена.</p>
+</body>
+
+</html>

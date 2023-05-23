@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="windows-1251">
+    <title>Задача о рюкзаке</title>
+    <style>
+        p {
+            text-indent: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="text-align:center;">Рюкзачные криптоситсемы</h3>
+    <h3 style="text-align:center;">Задача о рюкзаке</h3>
+    <p>В 1978 году Ральф К. Меркл и Мартин Э. Хеллман, оба инженеры-электрики из
+        Стэнфордского университета, разработали криптосистему с открытым ключом,
+        основанную на задаче о рюкзаке, знаменитой задаче в комбинаторике.</p>
+    <p> Ее можно сформулировать следующим образом:
+        учитывая рюкзак объемом <code><i>S</i></code> и <code><i>n</i></code> предметов различных объемов
+        <code><i>a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub></i></code>
+        , какой из предметов может заполнить рюкзак?
+    </p>
+    <p>
+        Другими словами, учитывая положительные целые числа
+        <code><i>a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub></i></code>,
+        называемые весами, и положительное целое число <code><i>S</i></code>, решим (1)
+    </p>
+    <p style="text-align:center;"><code><i><math>
+        S = a<sub>1</sub>·x<sub>1</sub> + a<sub>2</sub>·x<sub>2</sub> + ... + a<sub>n</sub>·x<sub>n</sub>   (1)
+</math></i></code></p>
+    <p>где <code><i>x<sub>i</sub> = 0 или 1</i></code>, а <code><i>S</i></code> является точечным произведением
+        векторов<code><i>(a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub>)</i></code> и
+        <code><i>(x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub>)</i></code>
+    </p>
+    <p>Проблема с рюкзаком может</p>
+    <ul>
+        <li>не иметь решений</li>
+        <li>иметь одно единственное решение</li>
+        <li>иметь несколько решений</li>
+    </ul>
+    <p>Например, проблема с рюкзаком</p>
+    <p style="text-align:center;"><code><i><math>
+        3x<sub>1</sub> + 5x<sub>2</sub> + 9x<sub>3</sub> + 19x<sub>4</sub> + 37x<sub>5</sub> = 45
+</math></i></code></p>
+    <p>имеет одно решение <code><i>(1, 1, 0, 0, 1)</i></code>, так как</p>
+    <p style="text-align:center;"><code><i><math>
+        3 + 5 + 0 + 0 + 37 = 45
+</math></i></code></p>
+    <p>С другой стороны, проблема с рюкзаком</p>
+    <p style="text-align:center;"><code><i><math>
+        3x<sub>1</sub> + 5x<sub>2</sub> + 8x<sub>3</sub> + 13x<sub>4</sub> + 31x<sub>5</sub> = 34
+</math></i></code></p>
+    <p>имеет два решения: <code><i>(0, 0, 0, 1, 1) и (0, 1, 1, 0, 1)</i></code>, так как</p>
+    <p style="text-align:center;"><code><i><math>
+        0 + 0 + 0 + 13 + 21 = 34 = 0 + 5 + 8 + 0 + 21
+</math></i></code></p>
+    <p>Но проблема</p>
+    <p style="text-align:center;"><code><i><math>
+        5x<sub>1</sub> + 14x<sub>2</sub> + 15x<sub>3</sub> + 27x<sub>4</sub> + 11x<sub>5</sub> = 23
+</math></i></code></p>
+    <p>не имеет решений.</p>
+    <p>Задача (1) может быть решена довольно легко, если веса обладают особыми свойствами.
+        Например, если</p>
+    <p style="text-align:center;"><code><i><math>a<sub>i</sub> = 2<sup>i-1</sup></math></i></code></p>
+    <p>, то</p>
+    <p style="text-align:center;"><code><i><math>
+            S = x<sub>1</sub> + 2x<sub>2</sub> + 2<sup>2</sup>x<sub>3</sub> +···+ 2<sup>n-1</sup>x<sub>n</sub>
+        </math></i></code></p>
+    <p>имеет решение <code><i>(x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub>)</i></code>
+        если <code><i>(x<sub>n</sub>, x<sub>n-1</sub>, ..., x<sub>1</sub>) = S</i></code></p>
+    <p>Ее также легко решить, если</p>
+    <p style="text-align:center;"><code><i><math>
+        &sum;<sub>i=1</sub><sup>j-1</sup>a<sub>i</sub> &lt; a<sub>n</sub>,  2 &le; j &le; n
+    </math></i></code></p>
+    <p>Последовательность с этим свойство называется сверхвозрастающим.
+        Например, рассмотрим последовательность <code><i>3, 5, 9, 19, 37</i></code>.
+        Так как <code><i>3 &lt; 5, 3 + 5 &lt; 9, 3 + 5 + 9 &lt; 19, и 3 + 5 + 9 + 19 &lt; 37</i></code>
+        , то последовательность сверхувеличивается.</p>
+    <p></p>
+    <p>Следующий пример показывает, как решить задачу о рюкзаке с помощью увеличения веса.</p>
+    <p>Решим задачу о рюкзаке </p>
+    <p style="text-align:center;"><code><i><math>
+    3x<sub>1</sub> + 5x<sub>2</sub> + 9x<sub>3</sub> + 19x<sub>4</sub> + 37x<sub>5</sub> = 45.
+</math></i></code></p>
+    <p>Так как веса сверхувеличиваются и поскольку <code><i>3 + 5 + 9 + 19 &lt; 37 &lt; 45</i></code>, то
+    <p style="text-align:center;"><code><i><math> x<sub>5</sub> = 1</math></i></code></p>
+    <p>Тогда</p>
+    <p style="text-align:center;"><code><i><math>
+    3x<sub>1</sub> + 5x<sub>2</sub> + 9x<sub>3</sub> + 19x<sub>4</sub> = 8
+</math></i></code></p>
+    <p>Так как 19 &gt; 8 и 9 &gt; 8, то </p>
+    <p style="text-align:center;"><code><i><math>
+    x<sub>4</sub> = x<sub>3</sub> = 0
+</math></i></code></p>
+    <p>что дает</p>
+    <p style="text-align:center;"><code><i><math>
+        3x<sub>1</sub> + 5x<sub>2</sub> = 8
+    </math></i></code></p>
+    <p>Наконец,</p>
+    <p style="text-align:center;"><code><i><math>
+        x<sub>1</sub> = x<sub>2</sub> = 1
+    </math></i></code></p>
+    <p>Таким образом, решением данной проблемы является
+        <code><i>(1, 1, 0, 0, 1)</i></code>
+</body>
+
+</html>
