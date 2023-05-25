@@ -53,6 +53,7 @@ class MainWindow(QWidget):
         self.inp_user_name = QLineEdit()
         self.w_lb_userpasw = QLabel("Пароль:")
         self.inp_user_pasw = QLineEdit()
+        self.inp_user_pasw.setEchoMode(QLineEdit.Password)
         self.btn_log = QPushButton("Войти")
         self.btn_log.clicked.connect(self.click_btn_log)
 
