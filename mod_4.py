@@ -285,10 +285,7 @@ class Window_4(QWidget):
             for row in cursor.execute(sql):
                 number_of_mod = 0
                 for j in range(0, len(row), 2):
-                    if row[j]:
-                        output_stat += f'{list_mod[number_of_mod]}: {row[j+1]}/{row[j]} - {row[j+1]*100 // row[j]}%\n'
-                    else:
-                        output_stat += f'{list_mod[number_of_mod]}: 0/0 - 0%\n'
+                    output_stat += f'{list_mod[number_of_mod]}: {row[j+1]}/{row[j]} - {row[j+1]*100 // row[j] if row[j] else 0}%\n'
                     number_of_mod += 1
 
             self.w_outp.setText(output_stat)
