@@ -83,23 +83,19 @@ class Window_4(QWidget):
 
         self.count = 0
         try:
-
                 oracledb.init_oracle_client()
-
                 self.connection = oracledb.connect(
-                    user="edmod",
-                    password="edmod",
-                    host="192.168.92.60",
-                    port="49161",
-                    service_name="xe")
-
-                if self.connection: print(f"Successfully connected to Database: {datetime.datetime.now()}")
-                else: print(f"Error with connect to Database: {datetime.datetime.now()}")
+                                        user="student",
+                                        password="student",
+                                        host="192.168.92.60",
+                                        port="49161",
+                                        service_name="xe")
+                print(f"Successfully connected to Database: {datetime.datetime.now()}") if self.connection else print(f"Error with connect to Database: {datetime.datetime.now()}")
         except ValueError:
             print(f"ERROR")
             return 0
 
-        sql = f"SELECT user_id FROM USERS where user_name='{self.user_name}'"
+        sql = f"SELECT user_id FROM EDMOD.USERS where user_name='{self.user_name}'"
         cursor = self.connection.cursor()
         cursor.execute(sql)
         self.user_id = int(cursor.fetchall()[0][0])
@@ -112,13 +108,12 @@ class Window_4(QWidget):
             self.w_w_scroll = QWidget()
             self.w_box_tst = QVBoxLayout()
             self.test_plan = [self.w_chb_1_1.isChecked(),
-                         self.w_chb_1_2.isChecked(),
-                         self.w_chb_1_3.isChecked(),
-                         self.w_chb_2.isChecked(),
-                         self.w_chb_3_1.isChecked(),
-                         self.w_chb_3_2.isChecked(),
-                         self.w_chb_3_3.isChecked()]
-            
+                            self.w_chb_1_2.isChecked(),
+                            self.w_chb_1_3.isChecked(),
+                            self.w_chb_2.isChecked(),
+                            self.w_chb_3_1.isChecked(),
+                            self.w_chb_3_2.isChecked(),
+                            self.w_chb_3_3.isChecked()]
             self.w_inp_1 = QLineEdit()
             self.w_inp_2 = QLineEdit()
             self.w_inp_3 = QLineEdit()
@@ -127,13 +122,12 @@ class Window_4(QWidget):
             self.w_inp_6 = QLineEdit()
             self.w_inp_7 = QLineEdit()
             self.list_inp = [self.w_inp_1, 
-                        self.w_inp_2,
-                        self.w_inp_3,
-                        self.w_inp_4,
-                        self.w_inp_5,
-                        self.w_inp_6,
-                        self.w_inp_7]
-            
+                            self.w_inp_2,
+                            self.w_inp_3,
+                            self.w_inp_4,
+                            self.w_inp_5,
+                            self.w_inp_6,
+                            self.w_inp_7]
             self.test_ans = [''  for i in self.test_plan]
             self.outp = ""
             self.result_to_bd = [0 for i in range(len(list_mod)*2)]
@@ -241,7 +235,7 @@ class Window_4(QWidget):
                 for i in self.result_to_bd: insert_in_result.append(i)
                 print(insert_in_result)
 
-                sql = f"insert into results values(:1, CURRENT_DATE, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14, :15)"
+                sql = f"insert into edmod.results values(:1, CURRENT_DATE, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14, :15)"
                 with self.connection.cursor() as cursor:
                     cursor.execute(sql, insert_in_result)
                     print(f"Successfully insert the result of {self.user_name}: {datetime.datetime.now()}")
@@ -261,16 +255,13 @@ class Window_4(QWidget):
             output_stat = ''
 
             oracledb.init_oracle_client()
-
             self.connection = oracledb.connect(
-                user="edmod",
-                password="edmod",
-                host="192.168.92.60",
-                port="49161",
-                service_name="xe")
-
-            if self.connection: print(f"Successfully connected to Database: {datetime.datetime.now()}")
-            else: print(f"Error with connect to Database: {datetime.datetime.now()}")
+                                        user="student",
+                                        password="student",
+                                        host="192.168.92.60",
+                                        port="49161",
+                                        service_name="xe")
+            print(f"Successfully connected to Database: {datetime.datetime.now()}") if self.connection else print(f"Error with connect to Database: {datetime.datetime.now()}")
 
             sql = f"SELECT sum(mod_1_sub_1), sum(answer_mod_1_sub_1), \
                             sum(mod_1_sub_2), sum(answer_mod_1_sub_2), \
@@ -279,7 +270,7 @@ class Window_4(QWidget):
                             sum(mod_3_sub_1), sum(answer_mod_3_sub_1), \
                             sum(mod_3_sub_2), sum(answer_mod_3_sub_2), \
                             sum(mod_3_sub_3), sum(answer_mod_3_sub_3)\
-                    FROM results R JOIN USERS u ON R.user_id = u.user_id where r.user_id = {self.user_id}"
+                    FROM EDMOD.results R JOIN EDMOD.USERS u ON R.user_id = u.user_id where r.user_id = {self.user_id}"
             cursor = self.connection.cursor()
 
             for row in cursor.execute(sql):

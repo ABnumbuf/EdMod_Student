@@ -88,23 +88,19 @@ class MainWindow(QWidget):
             if self.user_name and self.user_pasw:
 
                 try:
-
                     oracledb.init_oracle_client()
-
                     self.connection = oracledb.connect(
-                    user="edmod",
-                    password="edmod",
-                    host="192.168.92.60",
-                    port="49161",
-                    service_name="xe")
-
-                    if self.connection: print(f"Successfully connected to Database: {datetime.datetime.now()}")
-                    else: print(f"Error with connect to Database: {datetime.datetime.now()}")
+                                                user="student",
+                                                password="student",
+                                                host="192.168.92.60",
+                                                port="49161",
+                                                service_name="xe")
+                    print(f"Successfully connected to Database: {datetime.datetime.now()}") if self.connection else print(f"Error with connect to Database: {datetime.datetime.now()}")
                 except ValueError:
                     print(f"ERROR")
                     return 0
 
-                sql = f"SELECT user_name, user_pasw FROM USERS where user_name='{self.user_name}'"
+                sql = f"SELECT user_name, user_pasw FROM EDMOD.USERS where user_name='{self.user_name}'"
                 
                 cursor = self.connection.cursor()
                 cursor.execute(sql)
